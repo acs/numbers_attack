@@ -18,6 +18,8 @@ func _ready():
 #func _process(delta):
 #	pass
 
+func get_type():
+	return "mob"
 
 func _on_VisibilityNotifier2D_screen_exited():
 	queue_free()

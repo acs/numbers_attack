@@ -1,6 +1,7 @@
 extends Area2D
 
 signal hit
+signal hit_mob
 
 export var speed = 400  # How fast the player will move (pixels/sec).
 var screen_size  # Size of the game window.
@@ -44,10 +45,13 @@ func _process(delta):
 
 
 func _on_Player_body_entered(body):
-	# hide()  # Player dissapears after being hit
-	# $CollisionShape2D.set_deferred("disabled", true)
-	total_sum += int(body.get_number())
-	emit_signal("hit")
+	if body.get_type() == "number":
+		total_sum += int(body.get_number())
+		emit_signal("hit")
+	else:
+		hide()
+		$CollisionShape2D.set_deferred("disabled", true)
+		emit_signal("hit_mob")
 
 func start(pos):
 	total_sum = 0

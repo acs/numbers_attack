@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Main.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://HUD.tscn" type="PackedScene" id=4]
 [ext_resource path="res://dodge_assets/art/House In a Forest Loop.ogg" type="AudioStream" id=5]
 [ext_resource path="res://dodge_assets/art/gameover.wav" type="AudioStream" id=6]
+[ext_resource path="res://Mob.tscn" type="PackedScene" id=7]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
@@ -20,6 +21,7 @@ _data = {
 [node name="Main" type="Node"]
 script = ExtResource( 2 )
 Number = ExtResource( 3 )
+Mob = ExtResource( 7 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 1.0
@@ -62,6 +64,7 @@ curve = SubResource( 2 )
 position = Vector2( 8, 8 )
 rotation = -1.22007e-07
 [connection signal="hit" from="Player" to="." method="update_sum"]
+[connection signal="hit_mob" from="Player" to="." method="game_over"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_ScoreTimer_timeout"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_StartTimer_timeout"]

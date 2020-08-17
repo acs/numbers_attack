@@ -17,6 +17,9 @@ func show_number(text):
 func get_number():
 	queue_free()
 	return $Label.text
-
+	
+func get_type():
+	return "number"
+	
 func _on_VisibilityNotifier2D_screen_exited():
 	queue_free()
