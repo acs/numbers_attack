@@ -18,11 +18,12 @@ func show_game_over():
 	yield(get_tree().create_timer(1), "timeout")
 	$StartButton.show()
 	
-func update_score(score):
-	$ScoreLabel.text = str(score)
+#func update_score(score):
+#	$ScoreLabel.text = str(score)
 	
-func update_total(total):
-	$ScoreLabel.text = str(total)
+func update_goal(total):
+	$Operation.text = str(total) + " + ? = "
+	$Goal.text = str(round(total + rand_range(0, 9)))
 
 func _on_StartButton_pressed():
 	$StartButton.hide()

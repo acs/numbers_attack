@@ -19,17 +19,21 @@ func game_over():
 	$MobTimer.stop()
 	$HUD.show_game_over()
 	get_tree().call_group("mobs", "queue_free")
+	get_tree().call_group("numbers", "queue_free")
 	$Music.stop()
 	$DeathSound.play()
 
-func update_sum():
-	$HUD.update_score($Player.total_sum)
+func check_sum():
+	if int($HUD/Goal.text) != $Player.total_sum:
+		game_over()
+	else:
+		$HUD.update_goal($Player.total_sum)
 
 func new_game():
 	score = 0
-	total = 9
+	total = 0
 	# $HUD.update_score(score)
-	$HUD.update_total(total)
+	$HUD.update_goal(total)
 	$HUD.show_message("Get Ready")
 	$Player.start($StartPosition.position)
 	$StartTimer.start()
@@ -72,7 +76,7 @@ func add_mob():
 	
 func _on_MobTimer_timeout():
 	add_number()
-	add_mob()
+	# add_mob()
 	
 func _on_ScoreTimer_timeout():
 	score += 1
