@@ -17,7 +17,7 @@ func _input(ev):
 		get_tree().paused = true
 		$HUD/ResumeButton.show()
 	if Input.is_key_pressed(KEY_ESCAPE):
-		game_over()
+		get_tree().change_scene("res://Main.tscn")
 
 func game_over():
 	$ScoreTimer.stop()
@@ -85,7 +85,7 @@ func add_mob():
 	mob.linear_velocity = mob.linear_velocity.rotated(direction)
 	
 func _on_MobTimer_timeout():
-	add_mob()
+	# add_mob()
 	pass
 	
 func _on_NumberTimer_timeout():
