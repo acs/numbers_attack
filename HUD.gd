@@ -2,14 +2,20 @@ extends CanvasLayer
 
 signal start_game
 
-func show_message(text):
+var current_total
+var goal_number
+
+func show_message(text, timeout=1):
 	$Message.text = text
 	$Message.show()
+	$MessageTimer.wait_time = timeout
 	$MessageTimer.start()
 
 func show_game_over():
-	show_message("Game Over")
+	show_message("Goal number: " + str(goal_number), 5)
 	# Wait until the MessageTimer has counted down.
+	yield($MessageTimer, "timeout")
+	show_message("Game Over")
 	yield($MessageTimer, "timeout")
 
 	$Message.text = "Numbers Attack!"
@@ -23,7 +29,8 @@ func show_game_over():
 	
 func update_goal(total, max_number):
 	$Operation.text = str(total) + " + ? = "
-	$Goal.text = str(round(total + rand_range(0, max_number)))
+	goal_number = round(rand_range(0, max_number))
+	$Goal.text = str(total + goal_number)
 
 func _on_StartButton_pressed():
 	$StartButton.hide()
