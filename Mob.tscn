@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://dodge_assets/art/enemyWalking_2.png" type="Texture" id=1]
 [ext_resource path="res://dodge_assets/art/enemyFlyingAlt_2.png" type="Texture" id=2]
@@ -7,8 +7,17 @@
 [ext_resource path="res://dodge_assets/art/enemyWalking_1.png" type="Texture" id=5]
 [ext_resource path="res://dodge_assets/art/enemyFlyingAlt_1.png" type="Texture" id=6]
 [ext_resource path="res://Mob.gd" type="Script" id=7]
-[ext_resource path="res://dodge_assets/art/enemyJumping_1.png" type="Texture" id=8]
-[ext_resource path="res://dodge_assets/art/enemyJumping_2.png" type="Texture" id=9]
+[ext_resource path="res://dodge_assets/art/pimiento.png" type="Texture" id=8]
+[ext_resource path="res://dodge_assets/art/enemy_alex.png" type="Texture" id=9]
+[ext_resource path="res://dodge_assets/art/enemy_fire2.png" type="Texture" id=10]
+[ext_resource path="res://dodge_assets/art/enemy_fire1.png" type="Texture" id=11]
+[ext_resource path="res://dodge_assets/art/enemy_fire3.png" type="Texture" id=12]
+[ext_resource path="res://dodge_assets/art/enemy_fire4.png" type="Texture" id=13]
+[ext_resource path="res://dodge_assets/art/enemy_alien2.png" type="Texture" id=14]
+[ext_resource path="res://dodge_assets/art/enemy_alien1.png" type="Texture" id=15]
+[ext_resource path="res://dodge_assets/art/enemy_alex1.png" type="Texture" id=16]
+[ext_resource path="res://dodge_assets/art/enemy_alex2.png" type="Texture" id=17]
+[ext_resource path="res://dodge_assets/art/cake1.png" type="Texture" id=18]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -17,7 +26,12 @@ animations = [ {
 "name": "walk",
 "speed": 3.0
 }, {
-"frames": [ ExtResource( 6 ), ExtResource( 2 ) ],
+"frames": [ ExtResource( 16 ), ExtResource( 17 ) ],
+"loop": true,
+"name": "alien",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 6 ), ExtResource( 2 ), ExtResource( 9 ) ],
 "loop": true,
 "name": "flight",
 "speed": 3.0
@@ -27,9 +41,29 @@ animations = [ {
 "name": "swim",
 "speed": 3.0
 }, {
-"frames": [ ExtResource( 8 ), ExtResource( 9 ) ],
+"frames": [ ExtResource( 18 ) ],
 "loop": true,
-"name": "jump",
+"name": "cakes",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 8 ) ],
+"loop": true,
+"name": "pimiento",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 11 ), ExtResource( 10 ) ],
+"loop": true,
+"name": "lava",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 12 ), ExtResource( 13 ) ],
+"loop": true,
+"name": "fire",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 15 ), ExtResource( 14 ) ],
+"loop": true,
+"name": "dancing",
 "speed": 5.0
 } ]
 
@@ -50,8 +84,7 @@ __meta__ = {
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 0.75, 0.75 )
 frames = SubResource( 1 )
-animation = "jump"
-frame = 1
+animation = "cakes"
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

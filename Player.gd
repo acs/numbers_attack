@@ -45,9 +45,12 @@ func _process(delta):
 
 
 func _on_Player_body_entered(body):
+	print_debug(body.get_type())
 	if body.get_type() == "number":
 		total_sum += int(body.get_number())
 		emit_signal("hit")
+	elif body.get_type() == "cakes":
+		pass
 	else:
 		hide()
 		$CollisionShape2D.set_deferred("disabled", true)
