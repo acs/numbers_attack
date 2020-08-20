@@ -12,15 +12,22 @@ func _ready():
 	randomize()
 	# new_game()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _input(ev):
+	if Input.is_key_pressed(KEY_P):
+		get_tree().paused = true
+		$HUD/ResumeButton.show()
+	if Input.is_key_pressed(KEY_ESCAPE):
+		game_over()
 
 func game_over():
 	$ScoreTimer.stop()
 	$MobTimer.stop()
 	$NumberTimer.stop()
 	$HUD.show_game_over()
+	# Take a little pause to take a look to the last scene
+	get_tree().paused = true
+	yield(get_tree().create_timer(1), "timeout")
+	get_tree().paused = false
 	get_tree().call_group("mobs", "queue_free")
 	get_tree().call_group("numbers", "queue_free")
 	$Music.stop()
@@ -78,7 +85,7 @@ func add_mob():
 	mob.linear_velocity = mob.linear_velocity.rotated(direction)
 	
 func _on_MobTimer_timeout():
-	# add_mob()
+	add_mob()
 	pass
 	
 func _on_NumberTimer_timeout():
@@ -92,3 +99,6 @@ func _on_StartTimer_timeout():
 	$MobTimer.start()
 	$NumberTimer.start()
 	$ScoreTimer.start()
+
+func _on_HUD_resume_game():
+	get_tree().paused = false

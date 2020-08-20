@@ -52,6 +52,7 @@ visible = false
 curve = SubResource( 1 )
 
 [node name="HUD" parent="." instance=ExtResource( 4 )]
+pause_mode = 2
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
@@ -71,4 +72,5 @@ rotation = -1.22007e-07
 [connection signal="timeout" from="NumberTimer" to="." method="_on_NumberTimer_timeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_ScoreTimer_timeout"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_StartTimer_timeout"]
+[connection signal="resume_game" from="HUD" to="." method="_on_HUD_resume_game"]
 [connection signal="start_game" from="HUD" to="." method="new_game"]

@@ -68,6 +68,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="ResumeButton" type="Button" parent="."]
+margin_left = 214.745
+margin_top = 909.49
+margin_right = 496.745
+margin_bottom = 993.49
+custom_fonts/font = SubResource( 3 )
+text = "Resume"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="MessageTimer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
@@ -83,4 +94,5 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 [connection signal="pressed" from="StartButton" to="." method="_on_StartButton_pressed"]
+[connection signal="pressed" from="ResumeButton" to="." method="_on_ResumeButton_pressed"]
 [connection signal="timeout" from="MessageTimer" to="." method="_on_MessageTimer_timeout"]

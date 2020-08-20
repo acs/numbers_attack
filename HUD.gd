@@ -1,9 +1,13 @@
 extends CanvasLayer
 
 signal start_game
+signal resume_game
 
 var current_total
 var goal_number
+
+func _ready():
+	$ResumeButton.hide()
 
 func show_message(text, timeout=1):
 	$Message.text = text
@@ -12,7 +16,7 @@ func show_message(text, timeout=1):
 	$MessageTimer.start()
 
 func show_game_over():
-	show_message("Goal number: " + str(goal_number), 5)
+	show_message("Goal number: " + str(goal_number), 2)
 	# Wait until the MessageTimer has counted down.
 	yield($MessageTimer, "timeout")
 	show_message("Game Over")
@@ -38,3 +42,8 @@ func _on_StartButton_pressed():
 
 func _on_MessageTimer_timeout():
 	$Message.hide()
+
+func _on_ResumeButton_pressed():
+	$ResumeButton.hide()
+	emit_signal("resume_game")
+	
