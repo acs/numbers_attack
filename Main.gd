@@ -17,6 +17,7 @@ func _ready():
 func game_over():
 	$ScoreTimer.stop()
 	$MobTimer.stop()
+	$NumberTimer.stop()
 	$HUD.show_game_over()
 	get_tree().call_group("mobs", "queue_free")
 	get_tree().call_group("numbers", "queue_free")
@@ -75,8 +76,11 @@ func add_mob():
 	mob.linear_velocity = mob.linear_velocity.rotated(direction)
 	
 func _on_MobTimer_timeout():
-	add_number()
 	# add_mob()
+	pass
+	
+func _on_NumberTimer_timeout():
+	add_number()
 	
 func _on_ScoreTimer_timeout():
 	score += 1
@@ -84,4 +88,5 @@ func _on_ScoreTimer_timeout():
 
 func _on_StartTimer_timeout():
 	$MobTimer.start()
+	$NumberTimer.start()
 	$ScoreTimer.start()
