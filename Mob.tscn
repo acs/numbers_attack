@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://dodge_assets/art/enemyWalking_2.png" type="Texture" id=1]
 [ext_resource path="res://dodge_assets/art/enemyFlyingAlt_2.png" type="Texture" id=2]
@@ -7,12 +7,14 @@
 [ext_resource path="res://dodge_assets/art/enemyWalking_1.png" type="Texture" id=5]
 [ext_resource path="res://dodge_assets/art/enemyFlyingAlt_1.png" type="Texture" id=6]
 [ext_resource path="res://Mob.gd" type="Script" id=7]
+[ext_resource path="res://dodge_assets/art/mina2.png" type="Texture" id=8]
+[ext_resource path="res://dodge_assets/art/mina1.png" type="Texture" id=9]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 6 ), ExtResource( 2 ) ],
+"frames": [ ExtResource( 5 ), ExtResource( 1 ) ],
 "loop": true,
-"name": "flight",
+"name": "walk",
 "speed": 3.0
 }, {
 "frames": [ ExtResource( 3 ), ExtResource( 4 ) ],
@@ -20,10 +22,15 @@ animations = [ {
 "name": "swim",
 "speed": 3.0
 }, {
-"frames": [ ExtResource( 5 ), ExtResource( 1 ) ],
+"frames": [ ExtResource( 6 ), ExtResource( 2 ) ],
 "loop": true,
-"name": "walk",
+"name": "flight",
 "speed": 3.0
+}, {
+"frames": [ ExtResource( 9 ), ExtResource( 8 ) ],
+"loop": true,
+"name": "mina",
+"speed": 5.0
 } ]
 
 [sub_resource type="CapsuleShape2D" id=2]
@@ -43,8 +50,7 @@ __meta__ = {
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 0.75, 0.75 )
 frames = SubResource( 1 )
-animation = "walk"
-frame = 1
+animation = "mina"
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
