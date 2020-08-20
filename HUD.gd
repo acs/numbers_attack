@@ -21,9 +21,9 @@ func show_game_over():
 #func update_score(score):
 #	$ScoreLabel.text = str(score)
 	
-func update_goal(total):
+func update_goal(total, max_number):
 	$Operation.text = str(total) + " + ? = "
-	$Goal.text = str(round(total + rand_range(0, 9)))
+	$Goal.text = str(round(total + rand_range(0, max_number)))
 
 func _on_StartButton_pressed():
 	$StartButton.hide()

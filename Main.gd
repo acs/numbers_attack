@@ -6,6 +6,8 @@ export (PackedScene) var Mob
 var score
 var total
 
+const MAX_NUMBER = 2
+
 func _ready():
 	randomize()
 	# new_game()
@@ -28,13 +30,13 @@ func check_sum():
 	if int($HUD/Goal.text) != $Player.total_sum:
 		game_over()
 	else:
-		$HUD.update_goal($Player.total_sum)
+		$HUD.update_goal($Player.total_sum, MAX_NUMBER)
 
 func new_game():
 	score = 0
 	total = 0
 	# $HUD.update_score(score)
-	$HUD.update_goal(total)
+	$HUD.update_goal(total, MAX_NUMBER)
 	$HUD.show_message("Get Ready")
 	$Player.start($StartPosition.position)
 	$StartTimer.start()
@@ -56,7 +58,7 @@ func add_number():
 	# Set the velocity (speed & direction).
 	number.linear_velocity = Vector2(rand_range(number.min_speed, number.max_speed), 0)
 	number.linear_velocity = number.linear_velocity.rotated(direction)
-	number.show_number(str(round(rand_range(0, 9))))
+	number.show_number(str(round(rand_range(0, MAX_NUMBER))))
 
 func add_mob():
 	# Create a Mob instance and add it to the scene.
