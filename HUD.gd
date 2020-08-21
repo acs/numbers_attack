@@ -30,6 +30,15 @@ func show_game_over():
 	
 #func update_score(score):
 #	$ScoreLabel.text = str(score)
+
+func _input(ev):
+	if Input.is_key_pressed(KEY_P):
+		get_tree().paused = !get_tree().paused
+		$ResumeButton.hide()
+		if get_tree().paused:
+			$ResumeButton.show()
+	if Input.is_key_pressed(KEY_ESCAPE):
+		get_tree().change_scene("res://Main.tscn")
 	
 func update_goal(total, max_number):
 	$Operation.text = str(total) + " + ? = "

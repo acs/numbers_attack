@@ -6,11 +6,12 @@ signal hit_mob
 export var speed = 400  # How fast the player will move (pixels/sec).
 var screen_size  # Size of the game window.
 var total_sum  # Total sum for collected numbers
+var last_hit_number  # last number hit
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	screen_size = get_viewport_rect().size
-	# hide()
+	hide()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -45,6 +46,7 @@ func _process(delta):
 
 
 func _on_Player_body_entered(body):
+	last_hit_number = body
 	if body.get_type() == "number":
 		total_sum += int(body.get_number())
 		emit_signal("hit")

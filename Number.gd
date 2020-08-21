@@ -15,7 +15,7 @@ func show_number(text):
 	$Label.show()
 
 func get_number():
-	queue_free()
+	# queue_free()
 	return $Label.text
 	
 func get_type():

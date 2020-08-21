@@ -12,13 +12,6 @@ func _ready():
 	randomize()
 	# new_game()
 
-func _input(ev):
-	if Input.is_key_pressed(KEY_P):
-		get_tree().paused = true
-		$HUD/ResumeButton.show()
-	if Input.is_key_pressed(KEY_ESCAPE):
-		get_tree().change_scene("res://Main.tscn")
-
 func game_over():
 	$ScoreTimer.stop()
 	$MobTimer.stop()
@@ -26,10 +19,11 @@ func game_over():
 	$HUD.show_game_over()
 	# Take a little pause to take a look to the last scene
 	get_tree().paused = true
-	yield(get_tree().create_timer(1), "timeout")
+	yield(get_tree().create_timer(2), "timeout")
 	get_tree().paused = false
 	get_tree().call_group("mobs", "queue_free")
 	get_tree().call_group("numbers", "queue_free")
+	$Player.hide()
 	$Music.stop()
 	$DeathSound.play()
 
@@ -38,6 +32,7 @@ func check_sum():
 		game_over()
 	else:
 		$HUD.update_goal($Player.total_sum, MAX_NUMBER)
+		$Player.last_hit_number.queue_free()
 
 func new_game():
 	score = 0
