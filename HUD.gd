@@ -26,7 +26,7 @@ func show_game_over():
 	$Message.show()
 	# Make a one-shot timer and wait for it to finish.
 	yield(get_tree().create_timer(1), "timeout")
-	$StartButton.show()
+	show_buttons()
 	
 #func update_score(score):
 #	$ScoreLabel.text = str(score)
@@ -40,14 +40,21 @@ func _input(ev):
 	if Input.is_key_pressed(KEY_ESCAPE):
 		get_tree().change_scene("res://Main.tscn")
 	
-func update_goal(total, max_number):
-	$Operation.text = str(total) + " + ? = "
-	goal_number = round(rand_range(0, max_number))
-	$Goal.text = str(total + goal_number)
-
-func _on_StartButton_pressed():
+func update_goal(operation, total, max_number):
+	if operation == "add":
+		$Operation.text = str(total) + " + ? = "
+		goal_number = round(rand_range(0, max_number))
+		$Goal.text = str(total + goal_number)
+	elif operation == "subtract":
+		$Operation.text = str(total) + " - ? = "
+		goal_number = round(rand_range(0, max_number))
+		$Goal.text = str(total - goal_number)
+		
+func hide_buttons():
 	$StartButton.hide()
-	emit_signal("start_game")
+	
+func show_buttons():
+	$StartButton.show()
 
 func _on_MessageTimer_timeout():
 	$Message.hide()
@@ -55,4 +62,7 @@ func _on_MessageTimer_timeout():
 func _on_ResumeButton_pressed():
 	$ResumeButton.hide()
 	emit_signal("resume_game")
-	
+
+func _on_StartButton_pressed():
+	hide_buttons()
+	emit_signal("start_game")

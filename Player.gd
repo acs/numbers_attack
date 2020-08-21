@@ -5,7 +5,8 @@ signal hit_mob
 
 export var speed = 400  # How fast the player will move (pixels/sec).
 var screen_size  # Size of the game window.
-var total_sum  # Total sum for collected numbers
+var total_add  # Total sum for collected numbers
+var total_subtract  # Total sum for collected numbers
 var last_hit_number  # last number hit
 
 # Called when the node enters the scene tree for the first time.
@@ -48,7 +49,8 @@ func _process(delta):
 func _on_Player_body_entered(body):
 	last_hit_number = body
 	if body.get_type() == "number":
-		total_sum += int(body.get_number())
+		total_add += int(body.get_number())
+		total_subtract -= int(body.get_number())
 		emit_signal("hit")
 	else:
 		hide()
@@ -56,7 +58,8 @@ func _on_Player_body_entered(body):
 		emit_signal("hit_mob")
 
 func start(pos):
-	total_sum = 0
+	total_add = 0
+	total_subtract = 0
 	position = pos
 	show()
 	$CollisionShape2D.disabled = false

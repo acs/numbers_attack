@@ -3,6 +3,7 @@ extends Node
 export (PackedScene) var Number
 export (PackedScene) var Mob
 
+var operation  # operation for the game: add, subtract, multiply, divide
 var score
 var total
 
@@ -10,7 +11,7 @@ const MAX_NUMBER = 2
 
 func _ready():
 	randomize()
-	# new_game()
+
 
 func game_over():
 	$ScoreTimer.stop()
@@ -27,18 +28,32 @@ func game_over():
 	$Music.stop()
 	$DeathSound.play()
 
+func check_operation():
+	if operation == "add":
+		check_sum()
+	elif operation == "subtract":
+		check_subtract()
+
 func check_sum():
-	if int($HUD/Goal.text) != $Player.total_sum:
+	if int($HUD/Goal.text) != $Player.total_add:
 		game_over()
 	else:
-		$HUD.update_goal($Player.total_sum, MAX_NUMBER)
+		$HUD.update_goal(operation, $Player.total_add, MAX_NUMBER)
 		$Player.last_hit_number.queue_free()
 
-func new_game():
+func check_subtract():
+	if int($HUD/Goal.text) != $Player.total_subtract:
+		game_over()
+	else:
+		$HUD.update_goal(operation, $Player.total_subtract, MAX_NUMBER)
+		$Player.last_hit_number.queue_free()
+
+func new_game(op="add"):
+	operation = op
 	score = 0
 	total = 0
 	# $HUD.update_score(score)
-	$HUD.update_goal(total, MAX_NUMBER)
+	$HUD.update_goal(operation, total, MAX_NUMBER)
 	$HUD.show_message("Get Ready")
 	$Player.start($StartPosition.position)
 	$StartTimer.start()
@@ -97,3 +112,16 @@ func _on_StartTimer_timeout():
 
 func _on_HUD_resume_game():
 	get_tree().paused = false
+
+func _on_HUD_start_game_add():
+	new_game("add")
+
+func _on_HUD_start_game_subtract():
+	new_game("subtract")
+
+func _on_HUD_start_game_multiply():
+	new_game("multiply")
+
+func _on_HUD_start_game_divide():
+	new_game("divide")
+
