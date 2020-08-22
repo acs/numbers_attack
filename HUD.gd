@@ -3,7 +3,6 @@ extends CanvasLayer
 signal start_game
 signal resume_game
 
-var current_total
 var goal_number
 
 func _ready():

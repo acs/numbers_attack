@@ -6,8 +6,10 @@ export (PackedScene) var Mob
 var operation  # operation for the game: add, subtract, multiply, divide
 var score
 var total
+var operations = ['add']
 
-const MAX_NUMBER = 2
+const MAX_NUMBER = 4
+const LEVEL1_SCORE = 3
 
 func _ready():
 	randomize()
@@ -26,29 +28,37 @@ func game_over():
 	$Music.stop()
 	$DeathSound.play()
 
-func check_operation():
+func check_number():
 	if operation == "add":
 		check_sum()
 	elif operation == "subtract":
 		check_subtract()
 
 func check_sum():
-	if int($HUD/Goal.text) != $Player.total_add:
+	if int($HUD/Goal.text) != total + $Player.hit_number.get_number():
 		game_over()
 	else:
 		score += 1
+		total += $Player.hit_number.get_number()
+		if score == LEVEL1_SCORE:
+			print_debug(operations)
+			operations.append("subtract")
+			print_debug(operations)
 		$HUD.update_score(score)
-		$HUD.update_goal(operation, $Player.total_add, MAX_NUMBER)
-		$Player.last_hit_number.queue_free()
+		operation = operations[randi() % operations.size()]
+		$HUD.update_goal(operation, total, MAX_NUMBER)
+		$Player.hit_number.queue_free()
 
 func check_subtract():
-	if int($HUD/Goal.text) != $Player.total_subtract:
+	if int($HUD/Goal.text) != total - $Player.hit_number.get_number():
 		game_over()
 	else:
 		score += 1
+		total -= $Player.hit_number.get_number()
 		$HUD.update_score(score)
-		$HUD.update_goal(operation, $Player.total_subtract, MAX_NUMBER)
-		$Player.last_hit_number.queue_free()
+		operation = operations[randi() % operations.size()]
+		$HUD.update_goal(operation, total, MAX_NUMBER)
+		$Player.hit_number.queue_free()
 
 func new_game(op="add"):
 	operation = op
@@ -104,7 +114,6 @@ func _on_MobTimer_timeout():
 func _on_NumberTimer_timeout():
 	add_number()
 	
-
 func _on_StartTimer_timeout():
 	$MobTimer.start()
 	$NumberTimer.start()
@@ -123,4 +132,3 @@ func _on_HUD_start_game_multiply():
 
 func _on_HUD_start_game_divide():
 	new_game("divide")
-

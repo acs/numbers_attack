@@ -37,6 +37,7 @@ __meta__ = {
 wait_time = 0.5
 
 [node name="NumberTimer" type="Timer" parent="."]
+wait_time = 0.5
 
 [node name="StartTimer" type="Timer" parent="."]
 wait_time = 2.0
@@ -64,7 +65,7 @@ curve = SubResource( 2 )
 [node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath"]
 position = Vector2( 8, 8 )
 rotation = -1.22007e-07
-[connection signal="hit" from="Player" to="." method="check_operation"]
+[connection signal="hit" from="Player" to="." method="check_number"]
 [connection signal="hit_mob" from="Player" to="." method="game_over"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]
 [connection signal="timeout" from="NumberTimer" to="." method="_on_NumberTimer_timeout"]
