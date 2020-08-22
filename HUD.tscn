@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://HUD.gd" type="Script" id=1]
 [ext_resource path="res://dodge_assets/fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=2]
@@ -16,6 +16,10 @@ action = "ui_select"
 
 [sub_resource type="ShortCut" id=5]
 shortcut = SubResource( 4 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 30
+font_data = ExtResource( 2 )
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource( 1 )
@@ -92,6 +96,17 @@ margin_bottom = 50.0
 custom_fonts/font = SubResource( 3 )
 shortcut = SubResource( 5 )
 text = "Start"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Score" type="Label" parent="."]
+margin_left = 271.529
+margin_top = 87.6813
+margin_right = 401.529
+margin_bottom = 124.681
+custom_fonts/font = SubResource( 2 )
+text = "Score: 0"
 __meta__ = {
 "_edit_use_anchors_": false
 }

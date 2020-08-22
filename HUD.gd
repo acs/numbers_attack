@@ -28,8 +28,6 @@ func show_game_over():
 	yield(get_tree().create_timer(1), "timeout")
 	show_buttons()
 	
-#func update_score(score):
-#	$ScoreLabel.text = str(score)
 
 func _input(ev):
 	if Input.is_key_pressed(KEY_P):
@@ -49,7 +47,11 @@ func update_goal(operation, total, max_number):
 		$Operation.text = str(total) + " - ? = "
 		goal_number = round(rand_range(0, max_number))
 		$Goal.text = str(total - goal_number)
-		
+	
+func update_score(score):
+	$Score.text = "Score: " + str(score)
+	
+
 func hide_buttons():
 	$StartButton.hide()
 	

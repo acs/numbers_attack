@@ -12,9 +12,7 @@ const MAX_NUMBER = 2
 func _ready():
 	randomize()
 
-
 func game_over():
-	$ScoreTimer.stop()
 	$MobTimer.stop()
 	$NumberTimer.stop()
 	$HUD.show_game_over()
@@ -38,6 +36,8 @@ func check_sum():
 	if int($HUD/Goal.text) != $Player.total_add:
 		game_over()
 	else:
+		score += 1
+		$HUD.update_score(score)
 		$HUD.update_goal(operation, $Player.total_add, MAX_NUMBER)
 		$Player.last_hit_number.queue_free()
 
@@ -45,6 +45,8 @@ func check_subtract():
 	if int($HUD/Goal.text) != $Player.total_subtract:
 		game_over()
 	else:
+		score += 1
+		$HUD.update_score(score)
 		$HUD.update_goal(operation, $Player.total_subtract, MAX_NUMBER)
 		$Player.last_hit_number.queue_free()
 
@@ -53,6 +55,7 @@ func new_game(op="add"):
 	score = 0
 	total = 0
 	# $HUD.update_score(score)
+	$HUD.update_score(score)
 	$HUD.update_goal(operation, total, MAX_NUMBER)
 	$HUD.show_message("Get Ready")
 	$Player.start($StartPosition.position)
@@ -101,14 +104,10 @@ func _on_MobTimer_timeout():
 func _on_NumberTimer_timeout():
 	add_number()
 	
-func _on_ScoreTimer_timeout():
-	score += 1
-	# $HUD.update_score(score)
 
 func _on_StartTimer_timeout():
 	$MobTimer.start()
 	$NumberTimer.start()
-	$ScoreTimer.start()
 
 func _on_HUD_resume_game():
 	get_tree().paused = false
