@@ -66,9 +66,11 @@ func update_score(score):
 
 func hide_buttons():
 	$StartButton.hide()
+	$ExitButton.hide()
 	
 func show_buttons():
 	$StartButton.show()
+	$ExitButton.show()
 
 func _on_MessageTimer_timeout():
 	$Message.hide()
@@ -80,3 +82,6 @@ func _on_ResumeButton_pressed():
 func _on_StartButton_pressed():
 	hide_buttons()
 	emit_signal("start_game")
+
+func _on_ExitButton_pressed():
+	get_tree().quit()
