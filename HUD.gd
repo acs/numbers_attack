@@ -5,6 +5,11 @@ signal resume_game
 
 var goal_number
 
+const ADD = "add"
+const SUBTRACT = "subtract"
+const MULTIPLY = "multiply"
+const DIVIDE = "divide"
+
 func _ready():
 	$ResumeButton.hide()
 
@@ -38,14 +43,22 @@ func _input(ev):
 		get_tree().change_scene("res://Main.tscn")
 	
 func update_goal(operation, total, max_number):
-	if operation == "add":
+	if operation == ADD:
 		$Operation.text = str(total) + " + ? = "
 		goal_number = round(rand_range(0, max_number))
 		$Goal.text = str(total + goal_number)
-	elif operation == "subtract":
+	elif operation == SUBTRACT:
 		$Operation.text = str(total) + " - ? = "
 		goal_number = round(rand_range(0, max_number))
 		$Goal.text = str(total - goal_number)
+	elif operation == MULTIPLY:
+		$Operation.text = str(total) + " x ? = "
+		goal_number = round(rand_range(0, max_number))
+		$Goal.text = str(total * goal_number)
+	elif operation == DIVIDE:
+		$Operation.text = str(total) + " / ? = "
+		goal_number = round(rand_range(1, max_number))
+		$Goal.text = str(round(total / goal_number))
 	
 func update_score(score):
 	$Score.text = "Score: " + str(score)
