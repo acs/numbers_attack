@@ -21,6 +21,7 @@ func _input(event):
 	if event is InputEventScreenTouch and event.pressed:
 		target = event.position
 		mobile = true
+	mobile = false  # disable mobile support until it is done right
 
 func _process(delta):
 	if mobile:
